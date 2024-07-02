@@ -34,7 +34,7 @@
     {\PassOptionsToClass{oneside}{scrartcl}}
     {\PassOptionsToClass{twoside}{scrartcl}}
 
-\LoadClass{scrartcl}
+\LoadClass[footheight=2cm]{scrartcl}
 
 
 
@@ -82,7 +82,7 @@
 \setlength\margintop{1cm}
 \setlength\marginbottom{1cm}
 
-\RequirePackage[bindingoffset=0cm,nomarginpar,noheadfoot]{geometry}
+\RequirePackage[nomarginpar]{geometry}
 \geometry{left=\marginleft,right=\marginright,top=\margintop,bottom=\marginbottom}
 
 % \setlength{\voffset}{\dimexpr -1in+\margintop}
@@ -130,7 +130,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequirePackage{xpatch}
-\RequirePackage{scrlayer-scrpage}
+\RequirePackage[footsepline]{scrlayer-scrpage}
 
 % declare new page style using layers
 \DeclareNewPageStyleByLayers{headerhighlightmain}{%
@@ -256,15 +256,13 @@
         \ifdef{\@photodiameter}{
                 \begin{minipage}[t]{\dimexpr \textwidth-\@photodiameter}        % to top align name and photo add [t] here
                     \vspace{0cm}%
-            }{
-                \begin{minipage}[t]{\textwidth}    
-            }
+            }{}
             % print the header text
             \begin{minipage}[t][2em]{\linewidth}
                 {\Huge\bfseries\color{headerfontcolor}\MakeUppercase{\@name}\par}
             \end{minipage}%
             \vfill%
-            \begin{minipage}[b][\dimexpr \headerheight-2em-\marginbottom]{\linewidth}%
+            \begin{minipage}[b][1cm]{\linewidth}%
                 {\large\bfseries\color{headerfontcolor}\@tagline\par}
             \end{minipage}%
         % finish the minipages for text and photo if photo is given
@@ -279,9 +277,7 @@
         			    \tikz\path[fill overzoom image={\@photo}]circle[radius=0.5\linewidth];
         			}
         		\end{minipage}%
-            }{
-                \end{minipage}
-            }
+            }{}
 	\end{minipage}%
 }
 
@@ -297,26 +293,20 @@
 % contact info
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\infofield}[2]{%
-        \begin{minipage}[t]{\linewidth}%
-            \begin{minipage}[t]{5mm}% wrap marker in minipage to allow multi-line contact info
-                \makebox[5mm][c]{\textcolor{accent}{\normalsize #1}}
-            \end{minipage}%
-            \hspace{0.5em}%
-            \begin{minipage}[t]{\dimexpr \linewidth-5mm-0.5em}% wrap info in minipage to allow multi-line info
-                #2
-            \end{minipage}%
-        \end{minipage}%
-        \vspace{0.2em}\newline
-}
+\newcommand{\infofield}[2]{
+    \mbox{\makebox[5mm]{\textcolor{accent}{\normalsize #1}}\hspace{0.5em}#2}%
+    \vspace{0.2em}\newline}
 \newcommand{\email}[1]{\infofield{\faEnvelope}{\href{mailto:#1}{#1}}}
 \newcommand{\address}[1]{\infofield{\faAt}{#1}}
 \newcommand{\location}[1]{\infofield{\faMapMarker}{#1}}
-\newcommand{\phone}[1]{\infofield{\faPhone}{#1}}
+\newcommand{\calendar}[1]{\infofield{\faCalendar}{#1}}
+\newcommand{\role}[1]{\infofield{\faUserTag}{#1}}
+\newcommand{\phone}[2]{\infofield{\faPhone}{\href{tel:#1}{#2}}}
 \newcommand{\homepage}[2]{\infofield{\faHome}{\href{#2}{#1}}}
 \newcommand{\linkedin}[2]{\infofield{\faLinkedin}{\href{#2}{#1}}}
 \newcommand{\twitter}[2]{\infofield{\faTwitter}{\href{#2}{#1}}}
 \newcommand{\github}[2]{\infofield{\faGithub}{\href{#2}{#1}}}
+\newcommand{\git}[2]{\infofield{\faCodeFork}{\href{#2}{#1}}}
 \newcommand{\orcid}[2]{\infofield{\aiOrcid}{\href{#2}{#1}}}
 \newcommand{\ads}[2]{\infofield{\aiADS}{\href{#2}{#1}}}
 
@@ -326,6 +316,7 @@
 
 \newcommand{\highlightbar}[1]{%
     \def\@highlightbar{%
+        \vspace{-1.5cm}
         \begin{minipage}[t]{\dimexpr \highlightwidth-\marginleft-\marginright}%
             #1%
         \end{minipage}%
@@ -373,8 +364,8 @@
 \renewcommand{\section}[2][]{%
     \bigskip%
     % \ifstrequal{#1}{}{}{\marginpar{\vspace*{\dimexpr 1pt-\baselineskip}\raggedright\input{#1}}}%
-    \ifstrequal{#1}{}{}{\large \makebox[5mm][c]{#1}\hspace{0.5em}}
-    {\color{heading}\Large\bfseries\MakeUppercase{#2}}\\[-1ex]%
+    \ifstrequal{#1}{}{}{\large \makebox[5mm][c]{\color{heading}#1}\hspace{0.5em}}
+    {\color{heading}\Large\bfseries\textsc{#2}}\\[-1ex]%
     {\color{heading}\rule{\linewidth}{1.0pt}\par}\smallskip
 }
 
@@ -513,6 +504,7 @@
 % publication
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcommand{\publink}[2][link]{\textcolor{awesome-skyblue}{\href{#2}{#1}}}
 \newcommand*{\ADS}[1]{\textcolor{awesome-skyblue}{\href{#1}{ADS}}}
 \newcommand*{\arXiv}[1]{\textcolor{awesome-skyblue}{\href{#1}{arXiv}}}
 
@@ -609,7 +601,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagestyle{headerhighlightmain}
-\RequirePackage{hyperref}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

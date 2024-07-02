@@ -1,13 +1,14 @@
+\PassOptionsToPackage{hidelinks}{hyperref}
 \documentclass[%singlesided,
                doublesided,
                paper=a4,
                fontsize=10pt
               ]{my-resume}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% set geometry
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[english]{babel}
+\usepackage[a-1b]{pdfx}
+\usepackage{hyperref}
+\usepackage{lastpage}
 
 \setlength\highlightwidth{8cm}
 \setlength\headerheight{4cm}            % note that margintop gets added to this value, i.e. the header bar is 5cm
@@ -16,18 +17,22 @@
 \setlength\margintop{1cm}
 \setlength\marginbottom{1cm}
 
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{textcomp}
+\setmainfont{Linux Libertine O}
+\newfontfamily\handwritten{TeX Gyre Chorus}
+\defaultfontfeatures{Ligatures=TeX}
+\setsansfont{Cantarell}
+\setmonofont[Scale=.75]{Liberation Mono}
+\newfontfamily{\xerdifont}{Righteous}
+\definecolor{xerdi-blue}{HTML}{AEA79F}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FONTS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\RequirePackage{fontspec}
-\setmainfont{Carlito}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% COLORS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{hologo}
+\def\TikZ{Ti\textit{k}Z}
+\def\LuaLaTeX{\hologo{LuaLaTeX}}
+\def\XeTeX{\hologo{XeTeX}}
+\def\Xerdi{{\color{xerdi-blue}\xerdifont Xerdi}}
 
 \colorlet{highlightbarcolor}{lightgray}
 \colorlet{headerbarcolor}{darkgray}
@@ -39,15 +44,10 @@
 \colorlet{body}{black}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% set document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \begin{document}
 
-\name{Dr. Nico Krieger}
-\tagline{Amazing tag line that makes HR managers want to hire you immediately.\\The tag line is aligned with the bottom of the picture to the right, so if you have\\multiple lines it fills the space to your name from the bottom. You might want to\\introduce manual line breaks to make this look nicer then simply filling up the lines.}
+\name{Mac Lotsen}
+\tagline{Amazing tag line that makes HR managers want to hire you immediately}
 \photo[round]{picture.jpg}{\dimexpr \headerheight-\marginbottom}   % make photo exactly match the header with margintop/marginright/marginbottom as margin
 
 \makeheader
@@ -57,14 +57,12 @@
     \section{Contact}
     
     \email{mail@mailprovider.com}
-    \phone{+49 123 456789}
+    \phone{0031123456789}{+31 123 456789}
     \location{Some Street 1, 12345 City Name}
     \vspace{0.5em}
-    \homepage{nicokrieger.com}{https://www.nicokrieger.de}
-    \github{@GiantMolecularCloud}{https://github.com/giantmolecularcloud}
-    \linkedin{Nico Krieger}{https://www.linkedin.com/in/nico-krieger-6b28151b2/}
-    \orcid{0000-0003-1104-2014}{https://www.orcid.org/0000-0003-1104-2014}
-    \ads{NASA/ADS publication list}{https://ui.adsabs.harvard.edu/search/fq=\%7B!type\%3Daqp\%20v\%3D\%24fq\_database\%7D&fq\_database=database\%3A\%20astronomy&p\_=0&q=pubdate\%3A\%5B2016-01\%20TO\%209999-12\%5D\%20author\%3A(\%22Krieger\%2C\%20Nico\%22)&sort=date\%20desc\%2C\%20bibcode\%20desc}
+    \homepage{xerdi.com}{https://www.xerdi.com}
+    \github{@MacLotsen}{https://github.com/MacLotsen}
+    \linkedin{Erik Nijenhuis}{https://www.linkedin.com/in/eriknijenhuis/}
     
     \section{Skills}
     
@@ -74,7 +72,7 @@
     \skill{C++}{2}
     \skill{Apple Script}{3}
     \skill{HTML/CSS}{3}
-    \skill{LaTeX}{4}
+    \skill{\LuaLaTeX}{5}
     
     \vspace{0.5em}
     \skillsection{Operating Systems}
@@ -162,9 +160,16 @@
 
 \pagestyle{highlightmain}
 
-% The highlightbar needs to be filled to display mainbar contents correctly in singlesised mode
+% The highlightbar needs to be filled to display mainbar contents correctly in singlesided mode
 % For an empty highlightbar, fill with empty space
-\highlightbar{\hfill}
+\highlightbar{%
+    Unfortunately, the highlightbar has to be filled manually, making it hard to align with related content in the \texttt{mainbar}.
+    An alternative method could be implemented, like using \texttt{\textbackslash marginpar}.
+
+    In the meantime, you can fiddle with \texttt{\textbackslash vspace\{2em\}} or \texttt{\textbackslash\textbackslash [2em]} respectively.\\[2em]
+
+    The \texttt{\textbackslash vfill{}} macro will not work within this region.
+}
 \mainbar{
 
     \section{Another section}
@@ -195,11 +200,21 @@
 \pubforcefullwidth
 
 Demonstrate what an \texttt{\textbackslash pagestyle\{empty\}} page looks like.
-Also show off the macros for publications that uses small icons for authors, date, journal and links.
+Also show off the macros for publications that use small icons for authors, date, journal and links.
 
-Achieving a good looking spacing can be tricky. For empty pagestyles where the full width is available use \texttt{\textbackslash pubforcefullwidth} to force the publoication list to take up all the available space.
+Achieving a good-looking spacing can be tricky.
+For empty \texttt{pagestyles} where the full width is available, use \texttt{\textbackslash pubforcefullwidth} to force the publication list to take up all the available space.
 The (relative) lengths reserved for date, journal and links can be set with the parameters \texttt{\textbackslash pubdatelength}, \texttt{\textbackslash pubjournallength} and \texttt{\textbackslash publinklength} as in \texttt{\textbackslash setlength\{\textbackslash pubdatelength\}\{0.15 \textbackslash linewidth\}}.
 \bigskip
+
+\publication
+    {Specifying and populating documents in YAML with \texttt{lua-placeholders} in \LaTeX}
+    {\textbf{E. Nijenhuis}}
+    {2024}
+    {\href{https://tug.org/TUGboat/tb45-1/}{TUGboat
+volume 45, number 1} (2024),
+pages 65--76}
+    {\publink[DOI]{https://tug.org/TUGboat/tb45-1/tb139nijenhuis-placeholders.html}}
 
 \publication
 	{The turbulent gas structure in the centers of NGC~253 and the Milky Way} % Title
