@@ -1,3 +1,6 @@
+.idea
+pdfa.xmpi
+*.xmpdata
 *.aux
 *.log
 *.out

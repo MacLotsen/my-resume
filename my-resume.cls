@@ -589,6 +589,17 @@
     \vspace{0.5em}
 }
 
+\newenvironment{story}{%
+    \newcommand\period[1]{\item[Period] ##1}%
+    \newcommand\company[1]{\item[Company] \textbf{##1}}%
+    \newcommand\functiontitle[1]{\item[Function] ##1}%
+    \newcommand\activities[1]{\item[Activities] ##1}%
+    \newcommand\keywords[1]{\item[Keywords] ##1}%
+    \begin{labeling}{Activities~~}
+}{
+    \end{labeling}
+}
+
 % lists
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

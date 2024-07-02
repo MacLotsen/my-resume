@@ -6,7 +6,14 @@
               ]{my-resume}
 
 \usepackage[english]{babel}
+
+% Temporary work around for broken pdfx issue, thanks to David Carlisle:
+%   https://tex.stackexchange.com/a/720984/314265
+\let\foo\currentgrouplevel
+\chardef\currentgrouplevel0
 \usepackage[a-1b]{pdfx}
+\let\currentgrouplevel\foo
+
 \usepackage{hyperref}
 \usepackage{lastpage}
 
@@ -26,7 +33,7 @@
 \setsansfont{Cantarell}
 \setmonofont[Scale=.75]{Liberation Mono}
 \newfontfamily{\xerdifont}{Righteous}
-\definecolor{xerdi-blue}{HTML}{AEA79F}
+\definecolor{xerdi-blue}{HTML}{174A67}
 
 \usepackage{hologo}
 \def\TikZ{Ti\textit{k}Z}
@@ -237,4 +244,24 @@ pages 65--76}
 	{The Astrophysical Journal Vol.881, Issue 1, article id. 43, 20 pp} % Journal
 	{\ADS{https://ui.adsabs.harvard.edu/abs/2019ApJ...881...43K}, \arXiv{https://arxiv.org/abs/1907.00731}} % ADS & arxiv links
 
+    \section{Detailed Work Experience}
+    \begin{story}
+        \period{2022 — 2024}
+        \company{\Xerdi~(in-house)}
+        \functiontitle{Owner}
+        \activities{%
+            \begin{itemize}
+                \item Managed contractual aspects of projects, including drafting terms and contracts in collaboration with VeiligDoen B.V.
+                \item Developed and published multiple \LaTeX\ packages, including \texttt{regulatory}\hspace*{1pt}\href{https://ctan.org/pkg/regulatory}{\scriptsize\faExternalLink},
+                    \texttt{lua-placeholders}\hspace*{1pt}\href{https://ctan.org/pkg/lua-placeholders}{\scriptsize\faExternalLink},
+                    \texttt{git\-info-lua}\hspace*{1pt}\href{https://ctan.org/pkg/gitinfo-lua}{\scriptsize\faExternalLink}, under the LPPLv1.3c license.
+                \item Created unique features for regulatory documents, such as efficiently referencing articles, sections, and parts.
+                \item Collaborated with CTAN and \TeX\ Live to make the software widely accessible across different platforms.
+                \item Infrastructure as Code implemented with Ansible for the PDF Excellence platform.
+                The platform runs virtually within KVM systems with Ubuntu 22.04 as operating system and contains the following services: Apache 2, Git shell \& \LaTeX.
+                For more information, ask for the \href{https://xerdi.com/static/public/xdp-product-specification.pdf}{XDP Product Specification} or the PDF Excellence brochure.
+            \end{itemize}
+            }
+        \keywords{\LaTeX, \LuaLaTeX, Lua, Git, Make, GitHub Actions, Docker, Ansible, KVM, Ubuntu 22.04, Apache 2, Git shell}
+    \end{story}
 \end{document}
