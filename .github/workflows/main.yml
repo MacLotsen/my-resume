@@ -1,17 +1,57 @@
 name: Build LaTeX document
-on: [push]
+on:
+  push:
+    tags:
+      - '*'
 jobs:
-    build_latex:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Set up Git repository
-              uses: actions/checkout@v1
-            - name: Compile LaTeX document
-              uses: xu-cheng/latex-action@v2
-              with:
-                  root_file: resume.tex
-                  latexmk_use_xelatex: true
-            - uses: actions/upload-artifact@v2
-              with:
-                  name: resume.pdf
-                  path: resume.pdf
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: maclotsen/texlive:with-gf
+          shell: bash
+          options: --rm -i -v ${{ github.workspace }}:/build
+          run: make screenshots
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref_name }}
+          draft: true
+          body: |
+            Release for version ${{ github.ref_name }}
+
+      - name: 'Upload Release Asset: Example PDF'
+        id: upload_release_asset_example_pdf
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/example.pdf
+          asset_name: example.pdf
+          asset_content_type: application/pdf
+
+      - name: 'Upload all resume-*.png files'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          upload_url="${{ steps.create_release.outputs.upload_url }}"
+          for file in $(find $GITHUB_WORKSPACE -name 'resume-*.png'); do
+            file_name=$(basename $file)
+            echo "Uploading $file_name..."
+            curl -XPOST \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Content-Type: application/pdf" \
+              --data-binary @$file \
+              "${upload_url}?name=$file_name"
+          done
