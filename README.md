@@ -1,4 +1,4 @@
-[![Build LaTeX document](https://github.com/GiantMolecularCloud/my-resume/actions/workflows/main.yml/badge.svg)](https://github.com/GiantMolecularCloud/my-resume/actions/workflows/main.yml)
+[![Build LaTeX document](https://github.com/MacLotsen/my-resume/actions/workflows/main.yml/badge.svg)](https://github.com/MacLotsen/my-resume/actions/workflows/main.yml)
 
 *This is a fork of [GiantMolecularCloud/my-resume](https://github.com/GiantMolecularCloud/my-resume).*
 
