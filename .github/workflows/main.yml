@@ -50,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/resume-0.pdf
+          asset_path: ${{ github.workspace }}/resume-0.png
           asset_name: resume-0.png
           asset_content_type: application/png
 
@@ -61,7 +61,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/resume-1.pdf
+          asset_path: ${{ github.workspace }}/resume-1.png
           asset_name: resume-1.png
           asset_content_type: application/png
 
@@ -72,6 +72,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/resume-2.pdf
+          asset_path: ${{ github.workspace }}/resume-2.png
           asset_name: resume-2.png
           asset_content_type: application/png
