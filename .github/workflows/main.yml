@@ -43,17 +43,35 @@ jobs:
           asset_name: example.pdf
           asset_content_type: application/pdf
 
-      - name: 'Upload all resume-*.png files'
+      - name: 'Upload Release Asset: Resume Page 0'
+        id: upload_release_asset_page_0
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          upload_url="${{ steps.create_release.outputs.upload_url }}"
-          for file in $(find $GITHUB_WORKSPACE -name 'resume-*.png'); do
-            file_name=$(basename $file)
-            echo "Uploading $file_name..."
-            curl -XPOST \
-              -H "Authorization: token $GITHUB_TOKEN" \
-              -H "Content-Type: application/pdf" \
-              --data-binary @$file \
-              "${upload_url}?name=$file_name"
-          done
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/resume-0.pdf
+          asset_name: resume-0.png
+          asset_content_type: application/png
+
+      - name: 'Upload Release Asset: Resume Page 1'
+        id: upload_release_asset_page_1
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/resume-1.pdf
+          asset_name: resume-1.png
+          asset_content_type: application/png
+
+      - name: 'Upload Release Asset: Resume Page 2'
+        id: upload_release_asset_page_2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/resume-2.pdf
+          asset_name: resume-2.png
+          asset_content_type: application/png
