@@ -26,4 +26,4 @@ example.pdf: example.xmpdata my-resume.cls resume.tex picture.jpg
 	latexmk -c example.aux
 
 screenshots: example.pdf
-	convert example.pdf resume.png
+	convert -verbose -density 150 example.pdf -quality 100 -background white -alpha remove -alpha off resume.png
