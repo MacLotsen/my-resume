@@ -1,7 +1,7 @@
 TITLE ?= Resume - Erik Nijenhuis
 AUTHOR ?= Erik Nijenhuis
 ORG ?= Xerdi
-COPYRIGHT ?= Copyright © 2024 \"$(AUTHOR)\"
+COPYRIGHT ?= Copyright © $(shell date +%Y) \"$(AUTHOR)\"
 CONTACT ?= Unknown
 SUBJECT ?= Curriculum Vitae $(AUTHOR) - $(CONTACT)
 
