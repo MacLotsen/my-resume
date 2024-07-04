@@ -11,7 +11,7 @@ Depending on your build environment you might have
 to switch to using ~~XeLaTeX~~LuaLaTeX instead of e.g. pdfTeX or pdfLaTeX.
 For VS Code, see ![#11](https://github.com/GiantMolecularCloud/my-resume/issues/11).
 
-An Overleaf template can be found here: ![overleaf template](https://www.overleaf.com/read/wkvmpvssssdn#9915ef).
+An Overleaf template can be found here: [overleaf template](https://www.overleaf.com/read/wkvmpvssssdn#9915ef).
 (Note that this template may not be the most up-to-date version. Also, the Righteous font isn't available on Overleaf, so that's left out)
 
 # Example PDF
