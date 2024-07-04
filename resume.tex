@@ -1,6 +1,4 @@
 \PassOptionsToPackage{hidelinks}{hyperref}
-\pdfvariable majorversion = 1
-\pdfvariable minorversion = 3
 \documentclass[%singlesided,
                doublesided,
                paper=a4,
@@ -8,13 +6,6 @@
               ]{my-resume}
 
 \usepackage[english]{babel}
-
-% Temporary work around for broken pdfx issue, thanks to David Carlisle:
-%   https://tex.stackexchange.com/a/720984/314265
-\let\foo\currentgrouplevel
-\chardef\currentgrouplevel0
-\usepackage[a-1b]{pdfx}
-\let\currentgrouplevel\foo
 
 \usepackage{hyperref}
 \usepackage{lastpage}

@@ -42,7 +42,8 @@
 % REQUIRED PACKAGES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \RequirePackage[utf8]{inputenc}
+\RequirePackage{luatex85}
+\RequirePackage[a-1b]{pdfx}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{tikz}
 \usetikzlibrary{arrows}
